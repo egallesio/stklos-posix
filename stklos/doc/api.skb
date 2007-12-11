@@ -1,0 +1,224 @@
+;;;;
+;;;; api.skb	-- POSIX API
+;;;; 
+;;;; Copyright © 2005-2007 Erick Gallesio - I3S-CNRS/ESSI <eg@essi.fr>
+;;;; 
+;;;; 
+;;;; This program is free software; you can redistribute it and/or modify
+;;;; it under the terms of the GNU General Public License as published by
+;;;; the Free Software Foundation; either version 2 of the License, or
+;;;; (at your option) any later version.
+;;;; 
+;;;; This program is distributed in the hope that it will be useful,
+;;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;;;; GNU General Public License for more details.
+;;;; 
+;;;; You should have received a copy of the GNU General Public License
+;;;; along with this program; if not, write to the Free Software
+;;;; Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, 
+;;;; USA.
+;;;; 
+;;;;           Author: Erick Gallesio [eg@essi.fr]
+;;;;    Creation date: 27-Dec-2005 13:49 (eg)
+;;;; Last file update: 12-Jun-2007 17:06 (eg)
+;;;;
+
+;;;; ======================================================================
+;;;;
+;;;; 				Directories
+;;;;
+;;;; ======================================================================
+
+(subsection :title "Directories Functions"
+;; ----------------------------------------------------------------------
+(docentry :name "posix-change-directory"
+	  :synopsys [(posix-change-directory path)]
+	  :text [
+Change the current directory to "path". Return |#t| in case of sucess.])
+
+   ;; ----------------------------------------------------------------------
+(docentry :name "posix-current-directory"
+	  :synopsys [(posix-current-directory)]
+	  :text [
+Return the current directory if possible. When an error occurs, this function 
+returns |#f|.])
+
+   
+;; ----------------------------------------------------------------------
+(docentry :name "posix-make-directory"
+	  :synopsys [(posix-make-directory path)]
+	  :text [
+Create a directory with name "path". Return |#t| in case of sucess.])
+
+;; ----------------------------------------------------------------------
+(docentry :name "posix-delete-directory"
+	  :synopsys [(posix-delete-directory path)]
+	  :text [
+Delete the directory "path". Return |#t| in case of sucess.])
+
+)
+
+;;;; ======================================================================
+;;;;
+;;;; 				Links
+;;;;
+;;;; ======================================================================
+(subsection :title "Links and Symbolic Links functions"
+
+;; ----------------------------------------------------------------------
+(docentry :name "posix-make-link"
+	  :synopsys [(posix-make-link old-path new-path)]
+	  :text [
+Create a hard link with the filename "new-path" that points to the file named 
+"old-path". Return |#t| in case of sucess.])
+
+;; ----------------------------------------------------------------------
+(docentry :name "posix-make-symbolic-link"
+	  :synopsys [(posix-delete-link old-path new-path)]
+	  :text [
+Create a symbolic  link with the filename "new-path" that points to the file named 
+"old-path".  Return |#t| in case of sucess.])
+
+;; ----------------------------------------------------------------------
+(docentry :name "posix-file-is-symbolic-link?"
+	  :synopsys [(posix-file-is-symbolic-link? path)]
+	  :text [
+Return |#t| if "path" designates a symbolic link and |#f| othewise.])
+   
+;; ----------------------------------------------------------------------
+(docentry :name "posix-read-symbolic-link"
+	  :synopsys [(posix-read-symbolic-link path)]
+	  :text [ Return a string containing the filename to
+which the symbolic link "path" points to.])
+
+)
+   
+;;;; ======================================================================
+;;;;
+;;;; 				Error management
+;;;;
+;;;; ======================================================================
+(define (tdl x)
+  (td :align 'left (string-append " posix/" (string-downcase x) " ")))
+
+(define (tdl2 x)
+  (td :width 20. :align 'left (string-append " posix/" (string-downcase x) " ")))
+  
+(subsection :title "Error management"
+
+   [When an error occurs POSIX sets  the ,(code "errno") global variable to a 
+return code describing the error. This error code is available
+from the ,(code "posix-errno") Scheme parameter.]
+   
+   (docentry :name "posix-errno"
+	  :synopsys (list "(posix-errno)" "(posix-errno value)")
+	  :text [Return the value of the POSIX |errno| variable. When a value is 
+passed to the |posix-errno|, this value is set to the POSIX |errno| variable.])
+   
+   (docentry :name "posix-error"
+	  :synopsys [(posix-error)]
+	  :text [Return a string describing the last POSIX error detected.])
+   
+   (p [Furthermore, the POSIX extension defines also the following constants for 
+representing POSIX error numbers.])
+   (linebreak)
+   (font :size -2  (table :breakable #t
+(tr (tdl "E2BIG")	  (tdl "EACCES") 	 (tdl "EADDRINUSE"))
+(tr (tdl "EADDRNOTAVAIL") (tdl "EAFNOSUPPORT")   (tdl "EAGAIN"))
+(tr (tdl "EALREADY")      (tdl "EBADF") 	 (tdl "EBADMSG"))
+(tr (tdl "EBUSY")	  (tdl "ECANCELED")      (tdl "ECHILD"))
+(tr (tdl "ECONNABORTED")  (tdl "ECONNREFUSED")   (tdl "ECONNRESET"))
+(tr (tdl "EDEADLK")       (tdl "EDESTADDRREQ")   (tdl "EDOM"))
+(tr (tdl "EDQUOT")        (tdl "EEXIST") 	 (tdl "EFAULT"))
+(tr (tdl "EFBIG")	  (tdl "EHOSTUNREACH")   (tdl "EIDRM"))
+(tr (tdl "EILSEQ")	  (tdl "EINPROGRESS")    (tdl "EINTR"))
+(tr (tdl "EINVAL")	  (tdl "EIO") 	         (tdl "EISCONN"))
+(tr (tdl "EISDIR")	  (tdl "ELOOP") 	 (tdl "EMFILE"))
+(tr (tdl "EMLINK")	  (tdl "EMSGSIZE")       (tdl "EMULTIHOP"))
+(tr (tdl "ENAMETOOLONG")  (tdl "ENETDLOWN")      (tdl "ENETRESET"))
+(tr (tdl "ENETUNREACH")   (tdl "ENFILE") 	 (tdl "ENOBUFS"))
+(tr (tdl "ENODATA")	  (tdl "ENODEV") 	 (tdl "ENOENT"))
+(tr (tdl "ENOEXEC")	  (tdl "ENOLCK") 	 (tdl "ENOLINK"))
+(tr (tdl "ENOMEM")	  (tdl "ENOMSG")         (tdl "ENOPROTOOPT"))
+(tr (tdl "ENOSPC")	  (tdl "ENOSR") 	 (tdl "ENOSTR"))
+(tr (tdl "ENOSYS")	  (tdl "ENOTCONN")       (tdl "ENOTDLIR"))
+(tr (tdl "ENOTEMPTY")     (tdl "ENOTSOCK")       (tdl "ENOTSUP"))
+(tr (tdl "ENOTTY")	  (tdl "ENXIO") 	 (tdl "EOPNOTSUPP"))
+(tr (tdl "EOVERFLOW")     (tdl "EPERM") 	 (tdl "EPIPE"))
+(tr (tdl "EPROTO")	  (tdl "EPROTONOSUPPORT")(tdl "EPROTOTYPE"))
+(tr (tdl "ERANGE")	  (tdl "EROFS") 	 (tdl "ESPIPE"))
+(tr (tdl "ESRCH")	  (tdl "ESTALE")         (tdl "ETIME"))
+(tr (tdl "ETIMEDOUT")     (tdl "ETXTBSY")        (tdl "EWOULDBLOCK"))
+(tr (tdl "EXDEV"))))
+   
+   
+   )
+;;;; ======================================================================
+;;;;
+;;;; 				System informations
+;;;;
+;;;; ======================================================================
+(subsection :title "System Informations"
+
+   (docentry :name "posix-file-informations"
+	     :synopsys (list "(posix-file-informations path)")
+	     :text [Return a keyword list describing the cureent status of file 
+"path".
+@lisp
+(posix-file-informations "/")
+           => (:dev 770 :ino 2 :mode 16877 :nlink 17 :uid 0 :gid 0 
+               :size 4096 :atime 1115017161 :mtime 1134028671 
+               :ctime 1134028671)
+@end lisp])
+   
+      (p [The following constants are defined to analyse the bits of the 
+,(bold "mode") component returned by ,(code "posix-file-informations"):])
+   (linebreak)
+   (table :breakable #t
+(tr (tdl2 "IFSOCK") (tdl2 "IFLNK") (tdl2 "IFREG") (tdl2 "IFBLK"))
+(tr (tdl2 "IFDIR")  (tdl2 "IFCHR") (tdl2 "IFIFO")  (tdl2 "ISUID"))
+(tr (tdl2 "ISGID")  (tdl2 "ISVTX") (tdl2 "IRWXU")  (tdl2 "IRUSR"))
+(tr (tdl2 "IWUSR")  (tdl2 "IXUSR") (tdl2 "IRWXG")  (tdl2 "IRGRP"))
+(tr (tdl2 "IWGRP")  (tdl2 "IXGRP") (tdl2 "IRWXO")  (tdl2 "IROTH"))
+(tr (tdl2 "IWOTH")  (tdl2 "IXOTH")))
+   
+   
+   (docentry :name "posix-file-permissions"
+             :synopsys [(posix-file-permissions path)]
+	     :text [Return the permissions flag associated to "path" if the file 
+is accesible. Return |#f| ostherwise.])
+   
+   (docentry :name "posix-uid->string"
+             :synopsys [(posix-uid->string uid)]
+	     :text [Return the login name associated to |uid|.])
+   
+   (docentry :name "posix-string->uid"
+             :synopsys [(posix-uid->string logname)]
+	     :text [Return the uid associated to the |logname|.])
+   
+    (docentry :name "posix-gid->string"
+             :synopsys [(posix-gid->string uid)]
+	     :text [Return the group name associated to |gid|.])
+   
+   (docentry :name "posix-string->gid"
+             :synopsys [(posix-uid->string grpname)]
+	     :text [Return the gid associated to the |grpname|.])
+
+   (docentry :name "posix-user-id"
+             :synopsys [(posix-user-id)]
+	     :text [Return the user id of the running process.])
+
+   (docentry :name "posix-group-id"
+             :synopsys [(posix-group-id)]
+	     :text [Return the group id of the running process.])
+
+   (docentry :name "posix-effective-user-id"
+             :synopsys [(posix-effective-user-id)]
+	     :text [Return the effective user id of the running process.])
+
+   (docentry :name "posix-effective-group-id"
+             :synopsys [(posix-effective-group-id)]
+	     :text [Return the effective group id of the running process.])
+   
+   )

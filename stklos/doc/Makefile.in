@@ -1,0 +1,36 @@
+#
+# Makefile.in
+# 
+# Copyright © 2005-2007 Erick Gallesio - I3S-CNRS/ESSI <eg@essi.fr>
+# 
+#           Author: Erick Gallesio [eg@essi.fr]
+#    Creation date: 27-Dec-2005 13:06 (eg)
+# Last file update: 12-Jun-2007 18:22 (eg)
+#
+
+DIST=@DIST@
+PACKAGE=@PACKAGE@
+OUT=$(PACKAGE).html $(PACKAGE).pdf
+SRC=$(PACKAGE).skb api.skb
+
+all: $(OUT) copy
+
+$(PACKAGE).html: $(SRC)
+	skribe -t html-color -o $(PACKAGE).html $(PACKAGE).skb
+
+$(PACKAGE).pdf: $(PACKAGE).ctex
+	texexec $(PACKAGE).ctex
+	rm -f $(PACKAGE).t?? $(PACKAGE).log *.mp
+
+$(PACKAGE).ctex: $(SRC)
+	skribe -o $(PACKAGE).ctex $(PACKAGE).skb
+
+clean:
+	rm -f $(PACKAGE).ctex 
+
+copy: 
+	cp -a *.pdf *.html *.css ../../doc
+
+distclean: clean
+	rm -f Makefile  version.stk $(OUT)
+

@@ -1,0 +1,76 @@
+;;;;
+;;;; posix.skb	-- Documentation od STklos Posix Extension
+;;;; 
+;;;; Copyright © 2005-2007 Erick Gallesio - I3S-CNRS/ESSI <eg@essi.fr>
+;;;; 
+;;;; 
+;;;; This program is free software; you can redistribute it and/or modify
+;;;; it under the terms of the GNU General Public License as published by
+;;;; the Free Software Foundation; either version 2 of the License, or
+;;;; (at your option) any later version.
+;;;; 
+;;;; This program is distributed in the hope that it will be useful,
+;;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;;;; GNU General Public License for more details.
+;;;; 
+;;;; You should have received a copy of the GNU General Public License
+;;;; along with this program; if not, write to the Free Software
+;;;; Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, 
+;;;; USA.
+;;;; 
+;;;;           Author: Erick Gallesio [eg@essi.fr]
+;;;;    Creation date: 27-Dec-2005 13:04 (eg)
+;;;; Last file update: 23-May-2007 16:04 (eg)
+;;;;
+
+
+(include "lib.stk")
+
+
+(customize-environment! 
+   (html :load "eg-web-extension.ske")
+   (pdf  :user-style "posix-doc-style.tex"))
+
+;;;
+;;; Document
+;;;
+(document :title "POSIX Extension"
+   :subtitle (format "version ~A" *version*)
+   :author (author :name (font :size "+2" (bold "Erick Gallesio"))
+		     :affiliation "Université de Nice - Sophia Antipolis"
+		     :address '("930 route des Colles, BP 145"
+				"F-06903 Sophia Antipolis, Cedex"
+				"France"))
+   (section :title "Introduction"
+      (p [This extension exposes POSIX functionalities in ,(stklos). 
+Note that this version is ,(bold "very incomplete") and only a few POSIX 
+functionalities are available for now.]))
+      
+   (section :title "Basic Usage" 
+      (p [To use this extension you need to include the following
+form in your program:])
+      (fontified-code [
+(require "stklos-posix")
+(import stklos-posix)])
+      
+      (p [The functions of this extension may set a special
+parameter value when an error occurs. The mechanism used is
+described here (see also ,(ref :subsection "Error management")
+for more information).  In general a function returns a useful
+result (or ,(code "#t") if no useful value is possible) if no
+error is detected. When a function detects an error, it returns
+,(code "#f"). The error number is then available through the
+,(ref :mark "posix-errno" "posix-errno") parameter and a
+string describing the error can be built by the
+,(ref :mark "posix-error" "posix-error") primitive.]))
+
+
+   (section :title "Posix API"
+      (skribe-include "api.skb"))
+   
+   (section :title "Example"
+      (p [ Here is a simple program using the ,(stklos) Posix extension. It 
+displays some information of the path given as parameter])
+      (fontified-file "../examples/fstat.stk" 27))
+)

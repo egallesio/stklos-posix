@@ -1,0 +1,12 @@
+;;; Test for ScmPkg package stklos-posix
+;;;
+;;;           Author: Erick Gallesio [eg@essi.fr]
+;;;    Creation date: 23-May-2007 16:11 (eg)
+;;; Last file update: 23-May-2007 16:11 (eg)
+;;;
+
+(interface stklos-posix-test
+   (language stklos)
+   (import stklos-posix recette)
+   (export (run args)))
+

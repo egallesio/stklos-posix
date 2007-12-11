@@ -1,0 +1,91 @@
+;;;;
+;;;; stklos-posix.spi	-- STklos Posix ScmPkg
+;;;; 
+;;;; Copyright © 2005-2007 Erick Gallesio - I3S-CNRS/ESSI <eg@essi.fr>
+;;;; 
+;;;; 
+;;;; This program is free software; you can redistribute it and/or modify
+;;;; it under the terms of the GNU General Public License as published by
+;;;; the Free Software Foundation; either version 2 of the License, or
+;;;; (at your option) any later version.
+;;;; 
+;;;; This program is distributed in the hope that it will be useful,
+;;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;;;; GNU General Public License for more details.
+;;;; 
+;;;; You should have received a copy of the GNU General Public License
+;;;; along with this program; if not, write to the Free Software
+;;;; Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, 
+;;;; USA.
+;;;; 
+;;;;           Author: Erick Gallesio [eg@essi.fr]
+;;;;    Creation date:  7-Dec-2005 16:24 (eg)
+;;;; Last file update: 12-Jun-2007 16:55 (eg)
+;;;;
+
+(interface stklos-posix
+  (language stklos)
+  
+  (export
+   ;; Directories
+   (posix-make-directory path)
+   (posix-delete-directory path)
+   (posix-change-directory path)
+   (posix-current-directory path)
+   
+   ;; Link & Symbolic Links
+   (posix-make-link old-path new-path)
+   (posix-make-symbolic-link old-path new-path)
+   (posix-file-is-symbolic-link? path)
+   (posix-read-symbolic-link path)
+
+   ;; Error
+   posix-errno
+   (posix-error)
+
+   posix/e2big		posix/eacces		posix/eaddrinuse
+   posix/eaddrnotavail	posix/eafnosupport	posix/eagain
+   posix/ealready	posix/ebadf		posix/ebadmsg
+   posix/ebusy		posix/ecanceled		posix/echild
+   posix/econnaborted	posix/econnrefused	posix/econnreset
+   posix/edeadlk	posix/edestaddrreq	posix/edom
+   posix/edquot		posix/eexist		posix/efault
+   posix/efbig		posix/ehostunreach	posix/eidrm
+   posix/eilseq		posix/einprogress	posix/eintr
+   posix/einval		posix/eio		posix/eisconn
+   posix/eisdir		posix/eloop		posix/emfile
+   posix/emlink		posix/emsgsize		posix/emultihop
+   posix/enametoolong	posix/enetdown		posix/enetreset
+   posix/enetunreach	posix/enfile		posix/enobufs
+   posix/enodata	posix/enodev		posix/enoent
+   posix/enoexec	posix/enolck		posix/enolink
+   posix/enomem		posix/enomsg		posix/enoprotoopt
+   posix/enospc		posix/enosr		posix/enostr
+   posix/enosys		posix/enotconn		posix/enotdir
+   posix/enotempty	posix/enotsock		posix/enotsup
+   posix/enotty		posix/enxio		posix/eopnotsupp
+   posix/eoverflow	posix/eperm		posix/epipe
+   posix/eproto		posix/eprotonosupport	posix/eprototype
+   posix/erange		posix/erofs		posix/espipe
+   posix/esrch		posix/estale		posix/etime
+   posix/etimedout	posix/etxtbsy		posix/ewouldblock
+   posix/exdev
+
+   ;; System Information
+   (posix-file-informations path)
+   (posix-file-permissions path)
+   (posix-uid->string uid)
+   (posix-gid->string uid)
+   (posix-user-id)
+   (posix-group-id)
+   (posix-effective-user-id)
+   (posix-effective-group-id)
+
+   posix/ifsock posix/iflnk  posix/ifreg  posix/ifblk
+   posix/ifdir  posix/ifchr  posix/ififo  posix/isuid
+   posix/isgid  posix/isvtx  posix/irwxu  posix/irusr
+   posix/iwusr  posix/ixusr  posix/irwxg  posix/irgrp
+   posix/iwgrp  posix/ixgrp  posix/irwxo  posix/iroth
+   posix/iwoth  posix/ixoth
+   ))

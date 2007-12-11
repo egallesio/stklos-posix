@@ -1,0 +1,39 @@
+;;;;
+;;;; eg-web-extension		-- A variation of Manuel Web-book 
+;;;;
+;;;;
+;;;;           Author: Erick Gallesio [eg@essi.fr]
+;;;;    Creation date: 11-Oct-2004 14:48 (eg)
+;;;; Last file update: 28-Dec-2005 16:37 (eg)
+
+
+(define (extension-margin n e)
+  (center
+     (table :background "red" :width 90.
+	(tr (th "Version:"))
+	(tr :bg "white" (td :align 'left *version*))
+	(tr (th "Useful Links:"))
+	(tr :bg "white" (td :align 'left 
+			   (ref :url "http://stklos.net" "STklos Home page")))
+	(tr :bg "white" (td :align 'left 
+			   (ref :url "http://stklos.net/extensions" 
+			      "STklos Extensions"))))))
+
+;; ----------------------------------------------------------------------
+;;	Environment Customization ...
+;; ----------------------------------------------------------------------
+(define *border-bg* "#E6F2E6")
+
+(customize-environment! 
+ (html 
+    :main-browing-extra #f
+    :chapter-file #t
+    :css "posix-doc-style.css"
+    :title-background *border-bg*
+    :section-title-background *border-bg*
+    :subsection-title-background #f
+    :subsection-title-foreground "darkolivegreen"
+    :subsubsection-title-background #f
+    :left-margin-size 20.
+    :left-margin-background *border-bg*
+    :left-margin extension-margin))
