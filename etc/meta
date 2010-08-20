@@ -1,5 +1,6 @@
-((version "0.90.3")
+((version "1.00.0")
  (author "Erick Gallesio <eg at unice.fr>")
  (description "Support of POSIX functions for STklos")
  (keywords system stklos)
+ (stklos-doc(html pdf)) 
  (license gpl-v2))
