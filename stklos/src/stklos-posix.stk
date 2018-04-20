@@ -1,44 +1,45 @@
+;;;;                                            -*- coding: utf-8 -*-
 ;;;;
-;;;; stklos-posix.stk	-- STklos POSIX ScmPkg
-;;;; 
-;;;; Copyright © 2005-2007 Erick Gallesio - I3S-CNRS/ESSI <eg@essi.fr>
-;;;; 
-;;;; 
+;;;; stklos-posix.stk   -- STklos POSIX ScmPkg
+;;;;
+;;;; Copyright Â© 2005-2018 Erick Gallesio - I3S-CNRS/ESSI <eg@essi.fr>
+;;;;
+;;;;
 ;;;; This program is free software; you can redistribute it and/or modify
 ;;;; it under the terms of the GNU General Public License as published by
 ;;;; the Free Software Foundation; either version 2 of the License, or
 ;;;; (at your option) any later version.
-;;;; 
+;;;;
 ;;;; This program is distributed in the hope that it will be useful,
 ;;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;;;; GNU General Public License for more details.
-;;;; 
+;;;;
 ;;;; You should have received a copy of the GNU General Public License
 ;;;; along with this program; if not, write to the Free Software
-;;;; Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, 
+;;;; Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
 ;;;; USA.
-;;;; 
+;;;;
 ;;;;           Author: Erick Gallesio [eg@essi.fr]
 ;;;;    Creation date:  7-Dec-2005 16:24 (eg)
-;;;; Last file update: 23-May-2007 14:42 (eg)
+;;;; Last file update: 28-Mar-2018 12:33 (eg)
 ;;;;
 
 ;(define-module stklos-posix
 
   (define (posix-file-informations path)
     (let ((res (%posix-file-informations path)))
-      (and res 
-	   (list :dev   (vector-ref res 0)
-		 :ino   (vector-ref res 1)
-		 :mode  (vector-ref res 2)
-		 :nlink (vector-ref res 3)
-		 :uid   (vector-ref res 4)
-		 :gid   (vector-ref res 5)
-		 :size  (vector-ref res 6)
-		 :atime (vector-ref res 7)
-		 :mtime (vector-ref res 8)
-		 :ctime (vector-ref res 9)))))
+      (and res
+           (list :dev   (vector-ref res 0)
+                 :ino   (vector-ref res 1)
+                 :mode  (vector-ref res 2)
+                 :nlink (vector-ref res 3)
+                 :uid   (vector-ref res 4)
+                 :gid   (vector-ref res 5)
+                 :size  (vector-ref res 6)
+                 :atime (vector-ref res 7)
+                 :mtime (vector-ref res 8)
+                 :ctime (vector-ref res 9)))))
 
   ;; ======================================================================
 ;  (srfi0-register-feature! 'posix)

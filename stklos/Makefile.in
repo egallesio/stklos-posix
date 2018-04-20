@@ -1,27 +1,27 @@
 #
 # Makefile.in	-- Makefile for stklos-posix extension
-# 
-# Copyright © 2005-2010 Erick Gallesio - I3S-CNRS/ESSI <eg@essi.fr>
-# 
-# 
+#
+# Copyright © 2005-2018 Erick Gallesio - I3S-CNRS/ESSI <eg@essi.fr>
+#
+#
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, 
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
 # USA.
-# 
+#
 #           Author: Erick Gallesio [eg@essi.fr]
 #    Creation date:  4-Nov-2005 16:46 (eg)
-# Last file update: 20-Aug-2010 17:03 (eg)
+# Last file update: 12-Apr-2018 17:10 (eg)
 #
 
 PACKAGE=@PACKAGE@
@@ -32,12 +32,12 @@ all: build copy
 build:
 	(cd src; $(MAKE))
 
-copy: 
+install: all
+
+copy:
 	cp src/$(PACKAGE).$(SO) ../..
 
-install: 
-
-clean: 
+clean:
 	(cd src; $(MAKE) clean)
 	(cd doc; $(MAKE) clean)
 	rm -f ../../$(PACKAGE).$(SO) *~

@@ -1,7 +1,7 @@
 #
 # configure.in for SSL extension
 # 
-# Copyright © 2005-2007 Erick Gallesio - I3S-CNRS/ESSI <eg@essi.fr>
+# Copyright © 2005-2010 Erick Gallesio - I3S-CNRS/ESSI <eg@essi.fr>
 # 
 # 
 # This program is free software; you can redistribute it and/or modify
@@ -21,13 +21,13 @@
 # 
 #           Author: Erick Gallesio [eg@essi.fr]
 #    Creation date: 18-Mar-2005 14:51 (eg)
-# Last file update: 12-Jun-2007 18:56 (eg)
+# Last file update: 22-Aug-2010 23:50 (eg)
 #
 
 
 AC_INIT(src/stklos-posix.c)
 AC_PREREQ(2.52)
-VERSION=0.90
+VERSION=1.00
 PACKAGE=stklos-posix
 
 # Error message
